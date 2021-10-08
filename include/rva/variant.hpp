@@ -55,6 +55,19 @@ class variant : public std::variant<replace_t<T, self_t, variant<T...>>...> {
     base_type const&& get_base() const && { return *this; }
 };
 
+template <class Visitor, class... Variants>
+constexpr decltype(auto) visit(Visitor&& visitor, Variants&&... variants) {
+    return std::visit(
+        std::forward<Visitor>(visitor),
+        std::forward<Variants>(variants).get_base()...);
+}
+template <class R, class Visitor, class... Variants>
+constexpr R visit(Visitor&& visitor, Variants&&... variants) {
+    return std::visit<R>(
+        std::forward<Visitor>(visitor),
+        std::forward<Variants>(variants).get_base()...);
+}
+
 template <class T, class Find, class Replace>
 struct replace {
     using type = T;
