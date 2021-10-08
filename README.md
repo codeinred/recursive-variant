@@ -1,5 +1,3 @@
-![](.github/recursive-variant-authority.png)
-
 # Recursive Variant Authority: A Library for Recursive Variant Types
 
 Variants are exceedingly useful in C++, but they suffer from a singular and
@@ -9,6 +7,8 @@ mechanism to define recursive variants in C++.
 The Recursive Variant Authority provides a solution in the form of
 `rva::variant`, which allows you to write arbitrary recursive sum types with
 functionality identical to that provided by `std::variant`.
+
+![](.github/recursive-variant-authority.png)
 
 ## Understanding Recursive Variants
 
