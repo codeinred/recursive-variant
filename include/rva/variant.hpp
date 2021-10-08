@@ -30,6 +30,7 @@ using replace_t = typename replace<T, Find, Replace>::type;
 
 struct self_t {};
 
+// See: https://en.cppreference.com/w/cpp/utility/variant
 template <class... T>
 class variant : public std::variant<replace_t<T, self_t, variant<T...>>...> {
    public:
@@ -71,6 +72,7 @@ class variant : public std::variant<replace_t<T, self_t, variant<T...>>...> {
     bool operator==(variant const&) const = default;
 };
 
+// See: https://en.cppreference.com/w/cpp/utility/variant/visit
 template <class Visitor, class... Variants>
 constexpr decltype(auto) visit(Visitor&& visitor, Variants&&... variants) {
     return std::visit(
@@ -84,6 +86,7 @@ constexpr R visit(Visitor&& visitor, Variants&&... variants) {
         std::forward<Variants>(variants).get_base()...);
 }
 
+// See: https://en.cppreference.com/w/cpp/utility/variant/get
 template <std::size_t I, class... Types>
 constexpr decltype(auto) get(rva::variant<Types...>& v) {
     return std::get<I>(std::forward<decltype(v)>(v).get_base());
@@ -117,6 +120,7 @@ constexpr const T&& get(const rva::variant<Types...>&& v) {
     return std::get<T>(std::forward<decltype(v)>(v).get_base());
 }
 
+// See: https://en.cppreference.com/w/cpp/utility/variant/get_if
 template <std::size_t I, class... Types>
 constexpr auto* get_if(rva::variant<Types...>* pv) noexcept {
     return std::get_if<I>(pv->get_pointer_to_base());
