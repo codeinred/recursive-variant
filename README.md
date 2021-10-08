@@ -215,3 +215,23 @@ target.
 ```cmake
 target_link_libraries(<your target> PRIVATE rva::rva)
 ```
+
+### Running tests
+
+You may have noticed that the installation process "built" the library with
+testing off. Installing the library doesn't require running tests, however if
+you wish to run them, you may do so by ommitting the flag disabling testing, and
+then running `build/test_rva -s`. Testing is done via the
+[Catch2 Testing framework](https://github.com/catchorg/Catch2). You will see a
+lot of `{?}` in the test output, but that's just because Catch2 doesn't know how
+to print a variant.
+
+Tests may be found in the `test/` directory.
+
+```bash
+git clone https://github.com/codeinred/rva.git
+cd rva
+cmake -B build
+cmake --build build -j 8
+build/test_rva -s
+```
