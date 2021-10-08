@@ -1,4 +1,7 @@
-# Recursive Variant Authority: A Library for Recursive Variant Types
+# `rva::variant`: Recursive Sum Types for C++
+
+_Provided by the Recursive Variant Authority. We stand united in opposition to
+the [TVA](https://youtu.be/nW948Va-l10). May your variants never be pruned._
 
 Variants are exceedingly useful in C++, but they suffer from a singular and
 fundamental shortcoming: unlike sum types in many other languages, there's no
@@ -82,6 +85,7 @@ class json_value {
 ```
 
 ## `std::variant` is only a partial solution
+
 It quickly becomes apparent that the class we're writing is essentially a
 specialization of `std::variant`, which (thankfully) simplifies a lot of the
 code:
