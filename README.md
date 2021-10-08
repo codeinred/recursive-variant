@@ -192,7 +192,8 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(rva)
 ```
 
-Alternatively, you can install it as a CMake package like so:
+Alternatively, you can install it as a CMake package like so. _Please note that
+it's not necessary to build it in release mode, as it's a header-only library._
 
 ```bash
 git clone https://github.com/codeinred/rva.git
@@ -202,15 +203,15 @@ cmake --build build
 sudo cmake --install build
 ```
 
-It can then be found as a CMake package
+Once installed, the library can then be discovered as a CMake package:
 
 ```cmake
 find_package(rva REQUIRED)
 ```
 
-In either case, you can use it via `target_link_libraries`. The library is
-header-only, but this will ensure that it's added to the include path for that
-target.
+In either case, whether obtained via `FetchContent`, or installed as a package,
+you can use it via `target_link_libraries`. The library is header-only, but this
+will ensure that it's added to the include path for that target.
 
 ```cmake
 target_link_libraries(<your target> PRIVATE rva::rva)
