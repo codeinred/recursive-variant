@@ -1,4 +1,4 @@
-# `rva::variant`: Recursive Sum Types for C++
+# `rva::variant` — Recursive Sum Types for C++
 
 _Provided by the Recursive Variant Authority. We stand united in opposition to
 the [TVA](https://youtu.be/nW948Va-l10). May your variants never be pruned._
