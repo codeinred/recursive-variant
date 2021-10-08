@@ -19,8 +19,6 @@ struct replace;
  *
  * - `replace_t<char, char, int>` -> `int`
  * - `replace_t<std::vector<char>, char, int>` -> `std::vector<int>`
- * - `replace_t<std::variant<int, std::vector<self_t>>, self_t, rva::variant<int,
- * self_t>>` -> `std::variant<int, std::vector<rva::variant<int, self_t>>>`;
  *
  * @tparam T the type to transform.
  * @tparam Find the type to find
