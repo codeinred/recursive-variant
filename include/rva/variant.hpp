@@ -122,9 +122,13 @@ constexpr auto* get_if(rva::variant<Types...>* pv) noexcept {
     return std::get_if<T>(pv->get_pointer_to_base());
 }
 template <class T, class... Types>
-constexpr auto const* get_if(
-    const rva::variant<Types...>* pv) noexcept {
+constexpr auto const* get_if(const rva::variant<Types...>* pv) noexcept {
     return std::get_if<T>(pv->get_pointer_to_base());
+}
+
+template <class T, class... Types>
+constexpr bool holds_alternative(const rva::variant<Types...>& v) noexcept {
+    return std::holds_alternative(v.get_base());
 }
 } // namespace rva
 
