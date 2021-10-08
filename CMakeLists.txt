@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.14)
 
 project(
     "Recursive Variant Authority"
-    VERSION 0.9.0
+    VERSION 0.9.1
     DESCRIPTION "A Lightweight Tuple Implementation for Modern C++"
     HOMEPAGE_URL "https://github.com/codeinred/rva/"
     LANGUAGES CXX
@@ -81,27 +81,6 @@ option(
 if(PROJECT_IS_TOP_LEVEL AND BUILD_TESTING)
     include(CTest)
 
-    set(THREADS_PREFER_PTHREAD_FLAG ON)
-    find_package(Threads REQUIRED)
-
-    # Add all files in directory test as tests, and link against rva and
-    # threads
-
-    #if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    #    target_compile_options(
-    #        test_kilo_tuple
-    #        PRIVATE
-    #        -fbracket-depth=1000)
-    #endif()
-
-    set(BENCHMARK_ENABLE_TESTING OFF)
-    set(BENCHMARK_ENABLE_GTEST_TESTS OFF)
-    set(BENCHMARK_DOWNLOAD_DEPENDENCIES OFF)
-
-    find_or_fetch(
-        fmt
-        https://github.com/fmtlib/fmt.git
-        master)
     always_fetch(
         Catch2
         https://github.com/catchorg/catch2.git
@@ -114,7 +93,6 @@ if(PROJECT_IS_TOP_LEVEL AND BUILD_TESTING)
     target_link_libraries(
         test_rva
         rva::rva
-        fmt::fmt
         Catch2::Catch2WithMain)
 
     list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)

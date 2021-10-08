@@ -177,3 +177,19 @@ would allow)!
 The Recursive Variant Authority hopes that you enjoy your time using
 `rva::variant`, and we encourage you to make full use of it's capabilities when
 writing your code.
+
+## Usage & Installation
+
+The most straight-forward way to use `rva::variant` is by using CMake's
+FetchContent interface to find and fetch the library:
+
+```cmake
+FetchContent_Declare(
+    rva
+    GIT_REPOSITORY https://github.com/codeinred/rva.git
+    GIT_TAG        main
+    )
+FetchContent_MakeAvailable(rva)
+```
+
+Alternatively, you can install it as a CMake package
