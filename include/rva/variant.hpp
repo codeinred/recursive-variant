@@ -54,6 +54,11 @@ class variant : public std::variant<replace_t<T, self_t, variant<T...>>...> {
     constexpr base_type&& get_base() && noexcept { return *this; }
     constexpr base_type const&& get_base() const&& noexcept { return *this; }
 
+    constexpr base_type* get_pointer_to_base() noexcept { return this; }
+    constexpr base_type const* get_pointer_to_base() const noexcept {
+        return this;
+    }
+
     auto operator<=>(variant const&) const = default;
     bool operator==(variant const&) const = default;
 };
