@@ -187,7 +187,7 @@ to find and fetch the library:
 ```cmake
 FetchContent_Declare(
     rva
-    GIT_REPOSITORY https://github.com/codeinred/rva.git
+    GIT_REPOSITORY https://github.com/codeinred/recursive-variant.git
     GIT_TAG        main
 )
 FetchContent_MakeAvailable(rva)
@@ -197,7 +197,7 @@ Alternatively, you can install it as a CMake package like so. _Please note that
 it's not necessary to build it in release mode, as it's a header-only library._
 
 ```bash
-git clone https://github.com/codeinred/rva.git
+git clone https://github.com/codeinred/recursive-variant.git
 cd rva
 cmake -B build -DBUILD_TESTING=OFF
 cmake --build build
@@ -231,7 +231,7 @@ to print a variant.
 Tests may be found in the `test/` directory.
 
 ```bash
-git clone https://github.com/codeinred/rva.git
+git clone https://github.com/codeinred/recursive-variant.git
 cd rva
 cmake -B build
 cmake --build build -j 8

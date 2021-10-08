@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 3.14)
 
 project(
     "Recursive Variant Authority"
-    VERSION 0.9.1
-    DESCRIPTION "A Lightweight Tuple Implementation for Modern C++"
-    HOMEPAGE_URL "https://github.com/codeinred/rva/"
+    VERSION 0.9.2
+    DESCRIPTION "A Simple Library for Recursive Variant Types"
+    HOMEPAGE_URL "https://github.com/codeinred/recursive-variant/"
     LANGUAGES CXX
 )
 
