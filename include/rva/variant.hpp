@@ -39,13 +39,21 @@ class variant : public std::variant<replace_t<T, self_t, variant<T...>>...> {
 
     using base_type::base_type;
 
+    // Observers
+    using base_type::index;
+    using base_type::valueless_by_exception;
+
+    // Modifiers
+    using base_type::operator=;
+    using base_type::swap;
+    using base_type::emplace;
+
     variant() = default;
     variant(variant const&) = default;
     variant(variant&&) = default;
     variant& operator=(variant const&) = default;
     variant& operator=(variant&&) = default;
 
-    using base_type::swap;
     constexpr void swap(variant& other) noexcept(nothrow_swappable) {
         base_type::swap(other);
     }
