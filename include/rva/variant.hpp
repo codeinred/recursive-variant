@@ -70,6 +70,39 @@ constexpr R visit(Visitor&& visitor, Variants&&... variants) {
         std::forward<Visitor>(visitor),
         std::forward<Variants>(variants).get_base()...);
 }
+
+template <std::size_t I, class... Types>
+constexpr decltype(auto) get(rva::variant<Types...>& v) {
+    return std::get<I>(std::forward<decltype(v)>(v).get_base());
+}
+template <std::size_t I, class... Types>
+constexpr decltype(auto) get(rva::variant<Types...>&& v) {
+    return std::get<I>(std::forward<decltype(v)>(v).get_base());
+}
+template <std::size_t I, class... Types>
+constexpr decltype(auto) get(const rva::variant<Types...>& v) {
+    return std::get<I>(std::forward<decltype(v)>(v).get_base());
+}
+template <std::size_t I, class... Types>
+constexpr decltype(auto) get(const rva::variant<Types...>&& v) {
+    return std::get<I>(std::forward<decltype(v)>(v).get_base());
+}
+template <class T, class... Types>
+constexpr T& get(rva::variant<Types...>& v) {
+    return std::get<T>(std::forward<decltype(v)>(v).get_base());
+}
+template <class T, class... Types>
+constexpr T&& get(rva::variant<Types...>&& v) {
+    return std::get<T>(std::forward<decltype(v)>(v).get_base());
+}
+template <class T, class... Types>
+constexpr const T& get(const rva::variant<Types...>& v) {
+    return std::get<T>(std::forward<decltype(v)>(v).get_base());
+}
+template <class T, class... Types>
+constexpr const T&& get(const rva::variant<Types...>&& v) {
+    return std::get<T>(std::forward<decltype(v)>(v).get_base());
+}
 } // namespace rva
 
 template <class... T>
