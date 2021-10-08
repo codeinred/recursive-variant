@@ -46,8 +46,8 @@ class variant : public std::variant<replace_t<T, self_t, variant<T...>>...> {
 
     // Modifiers
     using base_type::operator=;
-    using base_type::swap;
     using base_type::emplace;
+    using base_type::swap;
 
     variant() = default;
     variant(variant const&) = default;
@@ -155,6 +155,13 @@ struct std::hash<rva::variant<T...>> : std::hash<std::variant<T...>> {
         return base_type::operator()(v.get_base());
     }
 };
+
+template <class... Types>
+struct std::variant_size<rva::variant<Types...>>
+  : std::integral_constant<std::size_t, sizeof...(Types)> {};
+template <class... Types>
+struct std::variant_size<const rva::variant<Types...>>
+  : std::integral_constant<std::size_t, sizeof...(Types)> {};
 
 // Implementation for replace
 namespace rva {
