@@ -163,6 +163,13 @@ template <class... Types>
 struct std::variant_size<const rva::variant<Types...>>
   : std::integral_constant<std::size_t, sizeof...(Types)> {};
 
+template <std::size_t I, class... Types>
+struct std::variant_alternative<I, rva::variant<Types...>>
+  : std::variant_alternative<I, std::variant<Types...>> {};
+template <std::size_t I, class... Types>
+struct std::variant_alternative<I, const rva::variant<Types...>>
+  : std::variant_alternative<I, const std::variant<Types...>> {};
+
 // Implementation for replace
 namespace rva {
 template <class T, class Find, class Replace>
