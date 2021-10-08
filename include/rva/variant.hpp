@@ -52,7 +52,7 @@ class variant : public std::variant<replace_t<T, self_t, variant<T...>>...> {
     base_type& get_base() & { return *this; }
     base_type const& get_base() const& { return *this; }
     base_type&& get_base() && { return *this; }
-    base_type const&& get_base() const && { return *this; }
+    base_type const&& get_base() const&& { return *this; }
 };
 
 template <class Visitor, class... Variants>
@@ -67,7 +67,22 @@ constexpr R visit(Visitor&& visitor, Variants&&... variants) {
         std::forward<Visitor>(visitor),
         std::forward<Variants>(variants).get_base()...);
 }
+} // namespace rva
 
+template <class... T>
+struct std::hash<rva::variant<T...>> : std::hash<std::variant<T...>> {
+    using base_type = std::hash<std::variant<T...>>;
+    using base_type::base_type;
+    hash() = default;
+    hash(hash const&) = default;
+    hash(hash&&) = default;
+    size_t operator()(rva::variant<T...> const& v) const {
+        return base_type::operator()(v.get_base());
+    }
+};
+
+// Implementation for replace
+namespace rva {
 template <class T, class Find, class Replace>
 struct replace {
     using type = T;
