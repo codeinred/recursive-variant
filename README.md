@@ -180,8 +180,9 @@ writing your code.
 
 ## Usage & Installation
 
-The most straight-forward way to use `rva::variant` is by using CMake's
-FetchContent interface to find and fetch the library:
+The most straight-forward way to use `rva::variant` is by using
+[CMake's FetchContent interface](https://cmake.org/cmake/help/v3.21/module/FetchContent.html)
+to find and fetch the library:
 
 ```cmake
 FetchContent_Declare(
