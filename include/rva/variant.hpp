@@ -53,6 +53,9 @@ class variant : public std::variant<replace_t<T, self_t, variant<T...>>...> {
     base_type const& get_base() const& { return *this; }
     base_type&& get_base() && { return *this; }
     base_type const&& get_base() const&& { return *this; }
+
+    auto operator<=>(variant const&) const = default;
+    bool operator==(variant const&) const = default;
 };
 
 template <class Visitor, class... Variants>
