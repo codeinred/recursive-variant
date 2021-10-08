@@ -25,6 +25,10 @@ struct replace<Find&, Find, Replace> {
     using type = Replace&;
 };
 template <class Find, class Replace>
+struct replace<Find&&, Find, Replace> {
+    using type = Replace&&;
+};
+template <class Find, class Replace>
 struct replace<Find[], Find, Replace> {
     using type = Replace[];
 };
@@ -59,6 +63,10 @@ struct replace<T*, Find, Replace> {
 template <class T, class Find, class Replace>
 struct replace<T&, Find, Replace> {
     using type = replace_t<T, Find, Replace>&;
+};
+template <class T, class Find, class Replace>
+struct replace<T&&, Find, Replace> {
+    using type = replace_t<T, Find, Replace>&&;
 };
 template <class T, class Find, class Replace>
 struct replace<T[], Find, Replace> {
