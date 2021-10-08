@@ -108,6 +108,24 @@ template <class T, class... Types>
 constexpr const T&& get(const rva::variant<Types...>&& v) {
     return std::get<T>(std::forward<decltype(v)>(v).get_base());
 }
+
+template <std::size_t I, class... Types>
+constexpr auto* get_if(rva::variant<Types...>* pv) noexcept {
+    return std::get_if<I>(pv->get_pointer_to_base());
+}
+template <std::size_t I, class... Types>
+constexpr auto const* get_if(const rva::variant<Types...>* pv) noexcept {
+    return std::get_if<I>(pv->get_pointer_to_base());
+}
+template <class T, class... Types>
+constexpr auto* get_if(rva::variant<Types...>* pv) noexcept {
+    return std::get_if<T>(pv->get_pointer_to_base());
+}
+template <class T, class... Types>
+constexpr auto const* get_if(
+    const rva::variant<Types...>* pv) noexcept {
+    return std::get_if<T>(pv->get_pointer_to_base());
+}
 } // namespace rva
 
 template <class... T>
