@@ -188,8 +188,30 @@ FetchContent_Declare(
     rva
     GIT_REPOSITORY https://github.com/codeinred/rva.git
     GIT_TAG        main
-    )
+)
 FetchContent_MakeAvailable(rva)
 ```
 
-Alternatively, you can install it as a CMake package
+Alternatively, you can install it as a CMake package like so:
+
+```bash
+git clone https://github.com/codeinred/rva.git
+cd rva
+cmake -B build -DBUILD_TESTING=OFF
+cmake --build build
+sudo cmake --install build
+```
+
+It can then be found as a CMake package
+
+```cmake
+find_package(rva REQUIRED)
+```
+
+In either case, you can use it via `target_link_libraries`. The library is
+header-only, but this will ensure that it's added to the include path for that
+target.
+
+```cmake
+target_link_libraries(<your target> PRIVATE rva::rva)
+```
