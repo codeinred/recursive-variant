@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 
 project(
-    "Recursive Variant Authority"
+    "rva::variant"
     VERSION 0.9.2
     DESCRIPTION "A Simple Library for Recursive Variant Types"
     HOMEPAGE_URL "https://github.com/codeinred/recursive-variant/"
