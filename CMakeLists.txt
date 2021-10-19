@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.14)
 
 project(
     "rva::variant"
-    VERSION 0.9.2
+    VERSION 0.9.3
     DESCRIPTION "A Simple Library for Recursive Variant Types"
     HOMEPAGE_URL "https://github.com/codeinred/recursive-variant/"
     LANGUAGES CXX
