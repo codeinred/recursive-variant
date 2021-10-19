@@ -165,10 +165,10 @@ struct std::variant_size<const rva::variant<Types...>>
 
 template <std::size_t I, class... Types>
 struct std::variant_alternative<I, rva::variant<Types...>>
-  : std::variant_alternative<I, std::variant<Types...>> {};
+  : std::variant_alternative<I, typename rva::variant<Types...>::base_type> {};
 template <std::size_t I, class... Types>
 struct std::variant_alternative<I, const rva::variant<Types...>>
-  : std::variant_alternative<I, const std::variant<Types...>> {};
+  : std::variant_alternative<I, typename rva::variant<Types...>::base_type> {};
 
 // Implementation for replace
 namespace rva {
@@ -264,6 +264,13 @@ struct replace<const T[N], Find, Replace> {
 template <template <class...> class T, class... Ts, class Find, class Replace>
 struct replace<T<Ts...>, Find, Replace> {
     using type = T<replace_t<Ts, Find, Replace>...>;
+};
+
+// Add shortcut for rva::variant to avoid replacing into instances of an
+// rva::variant that's given as a template parameter to another rva::variant
+template <class... Ts, class Find, class Replace>
+struct replace<rva::variant<Ts...>, Find, Replace> {
+    using type = rva::variant<Ts...>;
 };
 } // namespace rva
 
