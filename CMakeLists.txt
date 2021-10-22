@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.14)
 
 project(
-    "RVA_Variant"
-    VERSION 0.9.4
+    "rva"
+    VERSION 0.9.5
     DESCRIPTION "A Simple Library for Recursive Variant Types"
     HOMEPAGE_URL "https://github.com/codeinred/recursive-variant/"
     LANGUAGES CXX
@@ -35,7 +35,7 @@ target_include_directories(
 
 install(
     TARGETS rva
-    EXPORT rva_Targets
+    EXPORT ${PROJECT_NAME}_Targets
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
@@ -43,27 +43,27 @@ install(
 
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
-    "rvaConfigVersion.cmake"
+    "${PROJECT_NAME}ConfigVersion.cmake"
     VERSION ${PROJECT_VERSION}
     COMPATIBILITY SameMajorVersion
 )
 
 configure_package_config_file(
-    "${PROJECT_SOURCE_DIR}/cmake/rvaConfig.cmake.in"
-    "${PROJECT_BINARY_DIR}/rvaConfig.cmake"
-    INSTALL_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/rva/cmake
+    "${PROJECT_SOURCE_DIR}/cmake/config.cmake.in"
+    "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
+    INSTALL_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake
 )
 
 install(
-    EXPORT rva_Targets
-    FILE rvaTargets.cmake
+    EXPORT ${PROJECT_NAME}_Targets
+    FILE ${PROJECT_NAME}Targets.cmake
     NAMESPACE rva::
-    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/rva/cmake
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake
 )
 
-install(FILES "${PROJECT_BINARY_DIR}/rvaConfig.cmake"
-              "${PROJECT_BINARY_DIR}/rvaConfigVersion.cmake"
-        DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/rva/cmake
+install(FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
+              "${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
+        DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake
 )
 
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/rva
