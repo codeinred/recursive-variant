@@ -81,10 +81,11 @@ option(
 if(PROJECT_IS_TOP_LEVEL AND BUILD_TESTING)
     include(CTest)
 
-    always_fetch(
+    find_or_fetch(
         Catch2
         https://github.com/catchorg/catch2.git
-        devel)
+        devel
+        3.0.0)
     FetchContent_MakeAvailable(${remote_dependencies})
 
     add_executable(
@@ -95,6 +96,7 @@ if(PROJECT_IS_TOP_LEVEL AND BUILD_TESTING)
         rva::rva
         Catch2::Catch2WithMain)
 
+    list(APPEND CMAKE_MODULE_PATH ${CMAKE_INSTALL_PREFIX}/lib/cmake/Catch2)
     list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
     include(CTest)
     include(Catch)
