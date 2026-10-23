@@ -35,8 +35,6 @@ template <class... T>
 class variant : public std::variant<replace_t<T, self_t, variant<T...>>...> {
    public:
     using base_type = std::variant<replace_t<T, self_t, variant<T...>>...>;
-    constexpr static bool
-        nothrow_swappable = std::is_nothrow_swappable_v<base_type>;
 
     using base_type::base_type;
 
@@ -55,7 +53,12 @@ class variant : public std::variant<replace_t<T, self_t, variant<T...>>...> {
     variant& operator=(variant const&) = default;
     variant& operator=(variant&&) = default;
 
-    constexpr void swap(variant& other) noexcept(nothrow_swappable) {
+    // The noexcept specification is evaluated lazily, once variant is
+    // complete. MSVC evaluates a static data member initializer eagerly,
+    // which fails when base_type holds std::pair<K, variant> (for example
+    // through std::map<K, self_t>). See issue #3.
+    constexpr void swap(variant& other) noexcept(
+        std::is_nothrow_swappable_v<base_type>) {
         base_type::swap(other);
     }
     constexpr base_type& get_base() & noexcept { return *this; }
